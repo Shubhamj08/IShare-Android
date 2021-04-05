@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/ideas"
+        android:icon="@drawable/lamp"
+        android:title="Ideas"
+        app:showAsAction="always"
+        android:enabled="true"/>
+    <item
+        android:id="@+id/post"
+        android:icon="@drawable/add"
+        android:title="Post"
+        app:showAsAction="always"
+        android:enabled="false"/>
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/user"
+        android:title="Profile"
+        app:showAsAction="always"
+        android:enabled="false"/>
+
+
+
+</menu>
