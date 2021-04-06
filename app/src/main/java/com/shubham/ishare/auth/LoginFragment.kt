@@ -27,7 +27,7 @@ class LoginFragment : Fragment() {
 
         binding.apply{
             submitButton.setOnClickListener {
-                viewModel.onSubmit(loginText, passwordText)
+                viewModel.onSubmit(emailText, passwordText)
             }
 
             gotoRegisterButton.setOnClickListener { view: View ->
@@ -39,12 +39,14 @@ class LoginFragment : Fragment() {
             }
         }
 
-        viewModel.email.observe(viewLifecycleOwner, Observer {
-            binding.emailContainer.error = viewModel.validateEmail(it)
-        })
-        viewModel.password.observe(viewLifecycleOwner, Observer {
-            binding.passwordContainer.error = viewModel.validatePassword(it)
-        })
+        viewModel.apply{
+            email.observe(viewLifecycleOwner, Observer {
+                binding.emailContainer.error = validateEmail()
+            })
+            password.observe(viewLifecycleOwner, Observer {
+                binding.passwordContainer.error = validatePassword()
+            })
+        }
 
 
         return binding.root
