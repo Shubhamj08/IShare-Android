@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.shubham.ishare.R
 import com.shubham.ishare.databinding.FragmentLoginBinding
 
@@ -24,6 +25,9 @@ class LoginFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         binding.loginViewModel = viewModel
+
+        val bottomNavView: BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigation)
+        bottomNavView.visibility = View.GONE
 
         binding.apply{
             submitButton.setOnClickListener {

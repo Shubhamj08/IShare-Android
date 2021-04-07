@@ -15,6 +15,7 @@
         android:padding="8dp">
 
         <TextView
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -23,6 +24,7 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"/>
 
         <TextView
+            android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -39,6 +41,7 @@
             android:gravity="end">
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/liked"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -48,9 +51,9 @@
                 app:iconGravity="start"/>
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/share"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
-
                 android:layout_height="wrap_content"
                 app:icon="@android:drawable/ic_menu_share" />
 

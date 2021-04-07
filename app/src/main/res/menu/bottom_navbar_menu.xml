@@ -4,23 +4,20 @@
 
 
     <item
-        android:id="@+id/ideas"
+        android:id="@+id/toIdeas"
         android:icon="@drawable/lamp"
         android:title="Ideas"
-        app:showAsAction="always"
         android:enabled="true"/>
     <item
-        android:id="@+id/post"
+        android:id="@+id/toPostIdea"
         android:icon="@drawable/add"
         android:title="Post"
-        app:showAsAction="always"
-        android:enabled="false"/>
+        android:enabled="true"/>
     <item
-        android:id="@+id/profile"
+        android:id="@+id/toProfile"
         android:icon="@drawable/user"
         android:title="Profile"
-        app:showAsAction="always"
-        android:enabled="false"/>
+        android:enabled="true"/>
 
 
 

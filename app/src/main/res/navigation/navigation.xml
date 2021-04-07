@@ -30,5 +30,36 @@
         android:id="@+id/ideasFragment"
         android:name="com.shubham.ishare.ideas.IdeasFragment"
         android:label="IdeasFragment"
-        tools:layout="@layout/fragment_ideas"/>
+        tools:layout="@layout/fragment_ideas">
+        <action
+            android:id="@+id/action_ideasFragment_to_postIdeaFragment"
+            app:destination="@id/postIdeaFragment" />
+        <action
+            android:id="@+id/action_ideasFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/postIdeaFragment"
+        android:name="com.shubham.ishare.ideas.post.PostIdeaFragment"
+        android:label="fragment_post_idea"
+        tools:layout="@layout/fragment_post_idea" >
+        <action
+            android:id="@+id/action_postIdeaFragment_to_ideasFragment"
+            app:destination="@id/ideasFragment" />
+        <action
+            android:id="@+id/action_postIdeaFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.shubham.ishare.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_ideasFragment"
+            app:destination="@id/ideasFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_postIdeaFragment"
+            app:destination="@id/postIdeaFragment" />
+    </fragment>
 </navigation>
