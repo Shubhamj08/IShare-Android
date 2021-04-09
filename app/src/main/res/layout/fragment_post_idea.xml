@@ -4,20 +4,98 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ideas.post.PostIdeaFragment">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.shubham.ishare.ideas.post.PostIdeaViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            style="@style/TextAppearance.AppCompat.Display4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Post Idea"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <ImageView
+            android:id="@+id/postLogo"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ishare_logo" />
+
+        <TextView
+            android:id="@+id/postHeadline"
+            style="@style/TextAppearance.AppCompat.Display2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="32dp"
+            android:gravity="center"
+            android:text="Have an idea? Post it here!!"
+            app:layout_constraintEnd_toEndOf="@+id/postLogo"
+            app:layout_constraintStart_toStartOf="@+id/postLogo"
+            app:layout_constraintTop_toTopOf="@+id/postLogo" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/titleContainer"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="64dp"
+            android:hint="Title"
+            app:errorEnabled="true"
+            app:layout_constraintEnd_toEndOf="@+id/postHeadline"
+            app:layout_constraintStart_toStartOf="@+id/postHeadline"
+            app:layout_constraintTop_toBottomOf="@+id/postHeadline">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/postTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapWords"
+                android:text="@{viewModel.title}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/descriptionContainer"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:layout_marginEnd="64dp"
+            android:hint="Description"
+            app:errorEnabled="true"
+            app:counterEnabled="true"
+            app:layout_constraintEnd_toEndOf="@+id/titleContainer"
+            app:layout_constraintStart_toStartOf="@+id/titleContainer"
+            app:layout_constraintTop_toBottomOf="@+id/titleContainer">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/postDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:lines="5"
+                android:text="@{viewModel.description}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/submitButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10sp"
+            android:text="Post"
+            app:layout_constraintEnd_toEndOf="@+id/descriptionContainer"
+            app:layout_constraintStart_toStartOf="@+id/descriptionContainer"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionContainer" />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

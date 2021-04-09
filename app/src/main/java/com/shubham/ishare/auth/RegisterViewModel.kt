@@ -5,7 +5,7 @@ import android.widget.EditText
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.shubham.ishare.validation.Validate
+import com.shubham.ishare.validation.AuthValidate
 
 class RegisterViewModel: ViewModel() {
 
@@ -40,7 +40,7 @@ class RegisterViewModel: ViewModel() {
         _confirmPassword.value = confirmPass.text.toString()
     }
 
-    private val validate = Validate()
+    private val validate = AuthValidate()
 
     fun validateUsername(): String? {
         return validate.validateUsername(_username.value.toString())

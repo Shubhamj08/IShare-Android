@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.shubham.ishare.R
+import com.shubham.ishare.adapters.IdeaAdapter
 import com.shubham.ishare.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
@@ -18,6 +20,26 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = DataBindingUtil.inflate<FragmentProfileBinding>(inflater, R.layout.fragment_profile, container, false)
+
+        val viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
+
+        val ideasAdapter = IdeaAdapter()
+        binding.ideasList.adapter = ideasAdapter
+        ideasAdapter.data = listOf()
+
+        binding.apply {
+            yourIdeasButton.setOnClickListener {
+                viewModel.changeBottomSheetContentToYourIdeas()
+                bottomSheetHeading.text = viewModel.heading
+                ideasAdapter.data = viewModel.ideas
+            }
+
+            likedIdeasButton.setOnClickListener {
+                viewModel.changeBottomSheetContentToLikedIdeas()
+                bottomSheetHeading.text = viewModel.heading
+                ideasAdapter.data = viewModel.ideas
+            }
+        }
 
         val bottomNavView: BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigation)
         bottomNavView.visibility = View.VISIBLE

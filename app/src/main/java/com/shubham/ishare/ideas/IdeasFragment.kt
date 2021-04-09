@@ -23,8 +23,8 @@ class IdeasFragment : Fragment() {
 
         val adapter = IdeaAdapter()
         binding.ideaList.adapter = adapter
-
         adapter.data = viewModel.ideas
+
         val bottomNavView: BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigation)
         bottomNavView.visibility = View.VISIBLE
         bottomNavView.setOnNavigationItemSelectedListener { item ->
