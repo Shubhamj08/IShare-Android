@@ -15,7 +15,9 @@
             app:destination="@id/registerFragment" />
         <action
             android:id="@+id/action_loginFragment_to_ideasFragment"
-            app:destination="@id/ideasFragment" />
+            app:destination="@id/ideasFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -24,7 +26,9 @@
         tools:layout="@layout/fragment_register">
         <action
             android:id="@+id/action_registerFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/ideasFragment"
@@ -33,10 +37,12 @@
         tools:layout="@layout/fragment_ideas">
         <action
             android:id="@+id/action_ideasFragment_to_postIdeaFragment"
-            app:destination="@id/postIdeaFragment" />
+            app:destination="@id/postIdeaFragment"
+            app:popUpTo="@id/ideasFragment" />
         <action
             android:id="@+id/action_ideasFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            app:destination="@id/profileFragment"
+            app:popUpTo="@id/ideasFragment" />
     </fragment>
     <fragment
         android:id="@+id/postIdeaFragment"
@@ -48,7 +54,8 @@
             app:destination="@id/ideasFragment" />
         <action
             android:id="@+id/action_postIdeaFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            app:destination="@id/profileFragment"
+            app:popUpTo="@id/ideasFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -60,6 +67,7 @@
             app:destination="@id/ideasFragment" />
         <action
             android:id="@+id/action_profileFragment_to_postIdeaFragment"
-            app:destination="@id/postIdeaFragment" />
+            app:destination="@id/postIdeaFragment"
+            app:popUpTo="@id/ideasFragment" />
     </fragment>
 </navigation>

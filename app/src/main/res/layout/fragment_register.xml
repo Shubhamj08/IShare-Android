@@ -20,7 +20,7 @@
         android:id="@+id/logoOnRegister"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -128,13 +128,15 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/gotoLoginButton"
         style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:textColor="@color/teal_700"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Already Registered? Login Here!!"
+        android:textColor="@color/teal_700"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/submitButton"
         app:layout_constraintStart_toStartOf="@+id/submitButton"
-        app:layout_constraintTop_toBottomOf="@+id/submitButton" />
+        app:layout_constraintTop_toBottomOf="@+id/submitButton"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

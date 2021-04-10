@@ -30,26 +30,45 @@
             android:gravity="center"
             android:text="abc@gmail.com"/>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/yourIdeasButton"
+        <com.google.android.material.button.MaterialButtonToggleGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:layout_marginTop="20dp"
-            android:layout_marginHorizontal="24dp"
-            android:paddingVertical="10sp"
-            android:text="Your Ideas"/>
+            android:gravity="center"
+            app:singleSelection="true">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/yourIdeasButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                android:layout_marginHorizontal="24dp"
+                android:paddingVertical="10sp"
+                android:text="Your Ideas"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/likedIdeasButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                android:layout_marginHorizontal="24dp"
+                android:paddingVertical="10sp"
+                android:text="Ideas You Liked"/>
+
+        </com.google.android.material.button.MaterialButtonToggleGroup>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/likedIdeasButton"
-            android:layout_width="match_parent"
+            android:id="@+id/login"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:layout_marginHorizontal="24dp"
+            android:backgroundTint="@color/blue_700"
             android:paddingVertical="10sp"
-            android:text="Ideas You Liked"/>
+            android:text="LOGIN"
+            android:layout_gravity="center"
+            app:iconGravity="end"
+            app:icon="@drawable/profile"
+            app:iconSize="30dp"/>
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
@@ -67,7 +86,8 @@
                 app:behavior_skipCollapsed="true"
                 app:behavior_hideable="true"
                 app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-                app:srcCompat="@drawable/ishare_logo_large">
+                app:srcCompat="@drawable/ishare_logo_large"
+                tools:behavior_peekHeight="70dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/bottomSheetHeading"

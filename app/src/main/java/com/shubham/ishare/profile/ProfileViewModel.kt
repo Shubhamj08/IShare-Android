@@ -1,12 +1,18 @@
 package com.shubham.ishare.profile
 
 import androidx.lifecycle.ViewModel
+import com.shubham.ishare.ideas.Idea
+import com.shubham.ishare.ideas.iList
 
 class ProfileViewModel: ViewModel() {
-    private val yourIdeas = listOf<Int>(1, 2)
-    private val likedIdeas = listOf<Int>(1, 2, 3, 4)
+    val yourIdeas = iList.filter {
+        !it.liked
+    }
+    val likedIdeas = iList.filter {
+        it.liked
+    }
 
-    var ideas: List<Int> = listOf()
+    var ideas: List<Idea> = listOf<Idea>()
     var heading: String = ""
 
     fun changeBottomSheetContentToYourIdeas(){
