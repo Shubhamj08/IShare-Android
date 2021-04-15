@@ -1,5 +1,6 @@
 package com.shubham.ishare.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,27 +13,25 @@ import com.shubham.ishare.R
 import com.shubham.ishare.ideas.Idea
 
 class IdeaAdapter: RecyclerView.Adapter<IdeaAdapter.IdeaViewHolder>() {
-    var data = listOf<Idea>()
+    var data: List<Idea>? = listOf<Idea>()
     set(value) {
         field = value
         notifyDataSetChanged()
     }
 
-    override fun getItemCount() = data.size
+    override fun getItemCount() = data!!.size
 
     override fun onBindViewHolder(holder: IdeaViewHolder, position: Int) {
-        val idea = data[position]
-
+        val idea = data?.get(position)
         holder.apply {
-            title.text = idea.title
-            description.text = idea.description
-            like.text = idea.likes.size.toString()
-            if(idea.likes.contains(idea._id) || idea.liked)
+            title.text = idea?.title
+            description.text = idea?.description
+            like.text = idea?.nLikes.toString()
+            if(idea?.likes!!.contains(idea._id) || idea.liked)
                 like.setIconResource(R.drawable.like)
             else
                 like.setIconResource(R.drawable.like_o)
         }
-
 
     }
 

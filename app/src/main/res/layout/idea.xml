@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     app:strokeWidth="1dp"
     app:strokeColor="@color/material_on_surface_stroke"
     android:layout_width="match_parent"
@@ -23,17 +23,18 @@
             android:layout_marginStart="8dp"
             android:text="IDEA"
             android:textColor="#666666"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"/>
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"/>
 
         <TextView
             android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available."
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             android:textColor="#444444"
-            android:justificationMode="inter_word"/>
+            android:justificationMode="inter_word"
+            tools:text="In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available."
+            />
 
         <LinearLayout
             android:layout_width="match_parent"

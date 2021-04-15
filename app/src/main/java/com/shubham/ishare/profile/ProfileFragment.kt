@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -34,9 +35,15 @@ class ProfileFragment : Fragment() {
         val bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
 
+        viewModel.response.observe(viewLifecycleOwner, Observer {
+            viewModel.yourIdeas()
+            viewModel.likedIdeas()
+            ideasAdapter.data = viewModel.ideas
+        })
+
         binding.apply {
             yourIdeasButton.setOnClickListener {
-                if(viewModel.ideas == viewModel.yourIdeas) {
+                if(viewModel.ideas == viewModel.yourIdeas()) {
                     changeBottomSheetState(bottomSheetBehavior, false)
                 } else {
                     changeBottomSheetState(bottomSheetBehavior, true)
@@ -47,7 +54,7 @@ class ProfileFragment : Fragment() {
             }
 
             likedIdeasButton.setOnClickListener {
-                if(viewModel.ideas == viewModel.likedIdeas) {
+                if(viewModel.ideas == viewModel.likedIdeas()) {
                     changeBottomSheetState(bottomSheetBehavior, false)
                 } else {
                     changeBottomSheetState(bottomSheetBehavior, true)
