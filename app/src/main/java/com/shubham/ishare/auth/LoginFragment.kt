@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.shubham.ishare.CommonViewModel
 import com.shubham.ishare.R
 import com.shubham.ishare.databinding.FragmentLoginBinding
 
@@ -29,9 +30,13 @@ class LoginFragment : Fragment() {
         val bottomNavView: BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigation)
         bottomNavView.visibility = View.GONE
 
+        val commonViewModel = ViewModelProvider(requireActivity()).get(CommonViewModel::class.java)
+
         binding.apply{
             submitButton.setOnClickListener {
-                viewModel.onSubmit(emailText, passwordText)
+                if(viewModel.onSubmit(emailText, passwordText)){
+                    commonViewModel.login(emailText.text.toString(), passwordText.text.toString())
+                }
             }
 
             gotoRegisterButton.setOnClickListener { view: View ->
@@ -45,10 +50,10 @@ class LoginFragment : Fragment() {
 
         viewModel.apply{
             email.observe(viewLifecycleOwner, Observer {
-                binding.emailContainer.error = validateEmail()
+                binding.emailContainer.error = emailError
             })
             password.observe(viewLifecycleOwner, Observer {
-                binding.passwordContainer.error = validatePassword()
+                binding.passwordContainer.error = passError
             })
         }
 

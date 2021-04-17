@@ -5,7 +5,10 @@ import android.widget.EditText
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.shubham.ishare.services.Backend
 import com.shubham.ishare.validation.AuthValidate
+import kotlinx.coroutines.launch
 
 class LoginViewModel: ViewModel() {
 
@@ -17,9 +20,20 @@ class LoginViewModel: ViewModel() {
     val password: LiveData<String>
         get() = _password
 
-    fun onSubmit(em: EditText, pass: EditText){
+    var emailError: String? = null
+    var passError: String? = null
+
+    fun onSubmit(em: EditText, pass: EditText): Boolean{
         _email.value = em.text.toString()
         _password.value = pass.text.toString()
+        emailError = validateEmail()
+        passError = validatePassword()
+
+        if(emailError == null && passError == null){
+            return true
+        }
+
+        return false
     }
 
     private val validate = AuthValidate()

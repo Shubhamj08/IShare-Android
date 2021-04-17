@@ -1,6 +1,7 @@
 package com.shubham.ishare.validation
 
 class AuthValidate {
+
     fun validateUsername(username: String): String? {
         if(username == "")
             return "Username is required"

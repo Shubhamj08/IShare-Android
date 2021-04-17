@@ -7,10 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.shubham.ishare.CommonViewModel
+import com.shubham.ishare.MainActivity
 import com.shubham.ishare.R
 import com.shubham.ishare.adapters.IdeaAdapter
 import com.shubham.ishare.databinding.FragmentIdeasBinding
@@ -22,9 +25,15 @@ class IdeasFragment : Fragment() {
         val binding = DataBindingUtil.inflate<FragmentIdeasBinding>(inflater, R.layout.fragment_ideas, container, false)
 
         val viewModel = ViewModelProvider(this).get(IdeasViewModel::class.java)
+        val commonViewModel = ViewModelProvider(requireActivity()).get(CommonViewModel::class.java)
 
         val adapter = IdeaAdapter()
         binding.ideaList.adapter = adapter
+
+        commonViewModel.ideaResponse.observe(viewLifecycleOwner, Observer {
+            viewModel.updateResponse(commonViewModel.ideaResponse.value)
+        })
+
         viewModel.response.observe(viewLifecycleOwner, Observer {
             adapter.data = viewModel.response.value
         })

@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.shubham.ishare.CommonViewModel
 import com.shubham.ishare.R
 import com.shubham.ishare.adapters.IdeaAdapter
 import com.shubham.ishare.databinding.FragmentProfileBinding
@@ -27,6 +28,7 @@ class ProfileFragment : Fragment() {
         val binding = DataBindingUtil.inflate<FragmentProfileBinding>(inflater, R.layout.fragment_profile, container, false)
 
         val viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
+        val commonViewModel = ViewModelProvider(requireActivity()).get(CommonViewModel::class.java)
 
         val ideasAdapter = IdeaAdapter()
         binding.ideasList.adapter = ideasAdapter
@@ -34,6 +36,10 @@ class ProfileFragment : Fragment() {
 
         val bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+
+        commonViewModel.ideaResponse.observe(viewLifecycleOwner, Observer {
+            viewModel.updateResponse(commonViewModel.ideaResponse.value)
+        })
 
         viewModel.response.observe(viewLifecycleOwner, Observer {
             viewModel.yourIdeas()

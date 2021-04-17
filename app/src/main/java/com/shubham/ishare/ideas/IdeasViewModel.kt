@@ -18,19 +18,10 @@ class IdeasViewModel: ViewModel() {
     get() = _response
 
     init{
-        getIdeasFromBackend()
         _response.value = listOf<Idea>()
     }
 
-    private fun getIdeasFromBackend(){
-        viewModelScope.launch {
-            try {
-                 _response.value = Backend.retrofitService.getProperties()
-            } catch (ex: Exception){
-                Log.i("backend", "Failed: ${ex.message}")
-            }
-        }
+    fun updateResponse(ideas: List<Idea>?){
+        _response.value = ideas
     }
-
-
 }
