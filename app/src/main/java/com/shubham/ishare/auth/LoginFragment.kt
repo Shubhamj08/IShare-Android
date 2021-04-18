@@ -13,6 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.shubham.ishare.CommonViewModel
 import com.shubham.ishare.R
 import com.shubham.ishare.databinding.FragmentLoginBinding
+import com.shubham.ishare.user
 
 class LoginFragment : Fragment() {
 
@@ -31,6 +32,11 @@ class LoginFragment : Fragment() {
         bottomNavView.visibility = View.GONE
 
         val commonViewModel = ViewModelProvider(requireActivity()).get(CommonViewModel::class.java)
+        user.observe(viewLifecycleOwner, Observer {
+            if(it != null){
+                this.view?.findNavController()?.navigate(R.id.action_loginFragment_to_ideasFragment)
+            }
+        })
 
         binding.apply{
             submitButton.setOnClickListener {
