@@ -24,10 +24,10 @@ class LoginViewModel: ViewModel() {
     var passError: String? = null
 
     fun onSubmit(em: EditText, pass: EditText): Boolean{
+        emailError = validateEmail(em.text.toString())
+        passError = validatePassword(pass.text.toString())
         _email.value = em.text.toString()
         _password.value = pass.text.toString()
-        emailError = validateEmail()
-        passError = validatePassword()
 
         if(emailError == null && passError == null){
             return true
@@ -38,11 +38,12 @@ class LoginViewModel: ViewModel() {
 
     private val validate = AuthValidate()
 
-    fun validateEmail(): String? {
-        return validate.validateEmail(_email.value.toString())
+    fun validateEmail(em: String): String? {
+        return validate.validateEmail(em)
     }
 
-    fun validatePassword(): String? {
-        return validate.validatePassword(_password.value.toString())
+    fun validatePassword(pass: String): String? {
+        return validate.validatePassword(pass)
     }
+
 }

@@ -8,6 +8,8 @@ import java.lang.Exception
 
 val gson = Gson()
 class JWTUtils {
+
+    //Decode JWT received from backend
     fun decoded(jwtEncoded: String): User?{
         try {
             val split: List<String> = jwtEncoded.split(".")
@@ -18,6 +20,7 @@ class JWTUtils {
         return null
     }
 
+    //convert JWT to JSON User object
     fun getJson(strEncoded: String): String{
         val decodedBytes: ByteArray? = Base64.decode(strEncoded, Base64.URL_SAFE)
         return String(decodedBytes!!, Charsets.UTF_8)

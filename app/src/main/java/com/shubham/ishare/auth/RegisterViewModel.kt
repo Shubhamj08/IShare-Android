@@ -25,36 +25,44 @@ class RegisterViewModel: ViewModel() {
     val confirmPassword: LiveData<String>
         get() = _confirmPassword
 
-    init {
-        Log.i("All Logs", "Login ViewModel Created")
-//        _username.value = ""
-//        _email.value = ""
-//        _password.value = ""
-//        _confirmPassword.value = ""
-    }
+    var usernameError: String? = null
+    var emailError: String? = null
+    var passError: String? = null
+    var confirmPassError: String? = null
 
-    fun onSubmit(user: EditText, em: EditText, pass: EditText, confirmPass: EditText){
+    fun onSubmit(user: EditText, em: EditText, pass: EditText, confirmPass: EditText): Boolean{
+        usernameError = validateUsername(user.text.toString())
+        emailError = validateEmail(em.text.toString())
+        passError = validatePassword(pass.text.toString())
+        confirmPassError = validateConfirmPassword(pass.text.toString(), confirmPass.text.toString())
+
         _username.value = user.text.toString()
         _email.value = em.text.toString()
         _password.value = pass.text.toString()
         _confirmPassword.value = confirmPass.text.toString()
+
+        if(usernameError == null && emailError == null && passError == null && confirmPassError == null){
+            return true
+        }
+
+        return false
     }
 
     private val validate = AuthValidate()
 
-    fun validateUsername(): String? {
-        return validate.validateUsername(_username.value.toString())
+    fun validateUsername(user: String): String? {
+        return validate.validateUsername(user)
     }
 
-    fun validateEmail(): String? {
-        return validate.validateEmail(_email.value.toString())
+    fun validateEmail(em: String): String? {
+        return validate.validateEmail(em)
     }
 
-    fun validatePassword(): String? {
-        return validate.validatePassword(_password.value.toString())
+    fun validatePassword(pass: String): String? {
+        return validate.validatePassword(pass)
     }
 
-    fun validateConfirmPassword(): String? {
-        return validate.validateConfirmPassword(_password.value.toString(), _confirmPassword.value.toString())
+    fun validateConfirmPassword(pass: String, confirmPass: String): String? {
+        return validate.validateConfirmPassword(pass, confirmPass)
     }
 }

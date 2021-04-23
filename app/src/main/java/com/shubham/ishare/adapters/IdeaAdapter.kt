@@ -1,18 +1,17 @@
 package com.shubham.ishare.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import com.shubham.ishare.R
 import com.shubham.ishare.ideas.Idea
+import com.shubham.ishare.user
 
-class IdeaAdapter: RecyclerView.Adapter<IdeaAdapter.IdeaViewHolder>() {
+class IdeaAdapter(): RecyclerView.Adapter<IdeaAdapter.IdeaViewHolder>() {
+
     var data: List<Idea>? = listOf<Idea>()
     set(value) {
         field = value
@@ -27,8 +26,9 @@ class IdeaAdapter: RecyclerView.Adapter<IdeaAdapter.IdeaViewHolder>() {
             title.text = idea?.title
             description.text = idea?.description
             like.text = idea?.nLikes.toString()
-            if(idea?.likes!!.contains(idea._id) || idea.liked)
+            if(idea!!.liked || idea.likes.contains(user.value?._id)) {
                 like.setIconResource(R.drawable.like)
+            }
             else
                 like.setIconResource(R.drawable.like_o)
         }

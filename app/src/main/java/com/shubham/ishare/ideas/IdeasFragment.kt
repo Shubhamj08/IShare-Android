@@ -10,13 +10,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.shubham.ishare.CommonViewModel
 import com.shubham.ishare.MainActivity
 import com.shubham.ishare.R
 import com.shubham.ishare.adapters.IdeaAdapter
 import com.shubham.ishare.databinding.FragmentIdeasBinding
+import com.shubham.ishare.user
 
 class IdeasFragment : Fragment() {
 
@@ -24,22 +27,42 @@ class IdeasFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val binding = DataBindingUtil.inflate<FragmentIdeasBinding>(inflater, R.layout.fragment_ideas, container, false)
 
-        val viewModel = ViewModelProvider(this).get(IdeasViewModel::class.java)
+        //If user already exist then hide the login button
+        user.observe(viewLifecycleOwner, Observer {
+            if(it != null){
+                binding.login.visibility = View.GONE
+            } else {
+                binding.login.visibility = View.VISIBLE
+            }
+        })
+
+        binding.login.setOnClickListener{
+            navigateToLoginFragment()
+        }
+
+        //Common ViewModel
         val commonViewModel = ViewModelProvider(requireActivity()).get(CommonViewModel::class.java)
+        //Ideas ViewModel
+        val viewModel = ViewModelProvider(this).get(IdeasViewModel::class.java)
 
-        val adapter = IdeaAdapter()
-        binding.ideaList.adapter = adapter
-
+        //Update Ideas ViewModel with ideas from common ViewModel
         commonViewModel.ideaResponse.observe(viewLifecycleOwner, Observer {
             viewModel.updateResponse(commonViewModel.ideaResponse.value)
         })
 
+        //Recycler View Adapter
+        val adapter = IdeaAdapter()
+        binding.ideaList.adapter = adapter
+        //Update data in recycler view whenever it changes
         viewModel.response.observe(viewLifecycleOwner, Observer {
             adapter.data = viewModel.response.value
         })
 
+        //Set bottom navigation to visible in ideas fragment
         val bottomNavView: BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigation)
         bottomNavView.visibility = View.VISIBLE
+
+        //Navigate to other fragments on click
         bottomNavView.setOnNavigationItemSelectedListener { item ->
             when(item.itemId){
                 R.id.toPostIdea -> {
@@ -48,6 +71,17 @@ class IdeasFragment : Fragment() {
 
                 R.id.toProfile -> {
                     navigateToProfileFragment()
+                }
+            }
+            true
+        }
+
+        val topAppBar: MaterialToolbar = requireActivity().findViewById(R.id.appBar)
+        topAppBar.setOnMenuItemClickListener{
+            when(it.itemId){
+                R.id.logout -> {
+                    commonViewModel.logout()
+                    navigateToLoginFragment()
                 }
             }
             true
@@ -62,5 +96,9 @@ class IdeasFragment : Fragment() {
 
     private fun navigateToProfileFragment(){
         this.findNavController().navigate(R.id.action_ideasFragment_to_profileFragment)
+    }
+
+    private fun navigateToLoginFragment(){
+        this.findNavController().navigate(R.id.action_ideasFragment_to_loginFragment)
     }
 }

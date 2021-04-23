@@ -3,6 +3,8 @@ package com.shubham.ishare.services
 import androidx.annotation.StringRes
 import androidx.annotation.XmlRes
 import com.shubham.ishare.auth.LoginCreds
+import com.shubham.ishare.auth.RegisterCreds
+import com.shubham.ishare.database.User
 import com.shubham.ishare.ideas.Idea
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -17,6 +19,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.create
 import retrofit2.http.*
 import java.lang.reflect.Type
+import java.net.UnknownServiceException
 import javax.xml.transform.OutputKeys.METHOD
 import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
@@ -46,6 +49,12 @@ interface BackendService {
     suspend fun login(
         @Body user: LoginCreds
     ): JsonWebToken
+
+    @Headers("Content-Type: application/json")
+    @POST("users")
+    suspend fun register(
+        @Body user: RegisterCreds
+    ): Object
 }
 
 

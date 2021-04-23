@@ -1,5 +1,7 @@
 package com.shubham.ishare.ideas
 
+import com.shubham.ishare.user
+import com.squareup.moshi.Json
 import java.util.*
 
 data class Idea(
@@ -8,8 +10,9 @@ data class Idea(
     var likes: List<String>,
     var title: String,
     var description: String,
-    var user: String,
+    @Json(name = "user")
+    var author: String,
     val date: String,
-    var liked: Boolean = false,
+    var liked: Boolean = likes.contains(user),
     var nLikes: Int = likes.size
 )

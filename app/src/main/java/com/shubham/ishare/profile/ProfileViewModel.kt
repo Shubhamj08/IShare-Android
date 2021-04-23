@@ -7,10 +7,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shubham.ishare.ideas.Idea
 import com.shubham.ishare.services.Backend
+import com.shubham.ishare.user
 import kotlinx.coroutines.launch
 
 class ProfileViewModel: ViewModel() {
 
+    //Variables for ideas objects
     private val _response = MutableLiveData<List<Idea>>()
     val response: LiveData<List<Idea>>
     get() = _response
@@ -25,12 +27,12 @@ class ProfileViewModel: ViewModel() {
 
     fun yourIdeas(): List<Idea>? {
         return _response.value?.filter {
-            !it.liked
+            it.author == user.value?._id
         }
     }
     fun likedIdeas(): List<Idea>? {
         return _response.value?.filter {
-            it.liked
+            it.likes.contains(user.value?._id)
         }
     }
 
