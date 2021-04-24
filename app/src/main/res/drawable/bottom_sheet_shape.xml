@@ -5,5 +5,4 @@
         android:topLeftRadius="24dp"
         android:topRightRadius="24dp"/>
     <padding android:top="2dp"/>
-    <solid android:color="@color/white" />
 </shape>

@@ -13,17 +13,5 @@ import retrofit2.Response
 
 class IdeasViewModel: ViewModel() {
 
-    //Variables for idea objects
-    private val _response = MutableLiveData<List<Idea>>()
-    val response: LiveData<List<Idea>>
-    get() = _response
 
-    init{
-        _response.value = listOf<Idea>()
-    }
-
-    //update Ideas in the ViewModel
-    fun updateResponse(ideas: List<Idea>?){
-        _response.value = ideas
-    }
 }

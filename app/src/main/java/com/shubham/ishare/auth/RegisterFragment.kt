@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.shubham.ishare.CommonViewModel
 import com.shubham.ishare.R
@@ -93,6 +94,9 @@ class RegisterFragment : Fragment() {
         //Hide Bottom navigation on register fragment
         val bottomNavView: BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigation)
         bottomNavView.visibility = View.GONE
+
+        val topAppBar: MaterialToolbar = requireActivity().findViewById(R.id.appBar)
+        topAppBar.menu.setGroupVisible(R.id.icons_group, false)
 
         return binding.root
     }

@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
+import com.shubham.ishare.services.JsonWebToken
 
 @Dao
 interface UserDao {
@@ -18,4 +19,13 @@ interface UserDao {
 
     @Query("DELETE FROM LoginTable")
     suspend fun clear()
+
+    @Insert
+    suspend fun insertToken(token: JsonWebToken)
+
+    @Query("SELECT * FROM jwtTable")
+    suspend fun getToken(): JsonWebToken?
+
+    @Query("DELETE FROM jwtTable")
+    suspend fun clearToken()
 }

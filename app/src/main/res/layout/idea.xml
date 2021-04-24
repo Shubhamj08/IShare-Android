@@ -1,69 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    app:strokeWidth="1dp"
-    app:strokeColor="@color/material_on_surface_stroke"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:clickable="true"
-    android:layout_margin="16dp"
-    app:cardElevation="0dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <data>
+        <variable
+            name="idea"
+            type="com.shubham.ishare.ideas.Idea" />
+
+        <variable
+            name="commonViewModel"
+            type="com.shubham.ishare.CommonViewModel"/>
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/material_on_surface_stroke"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="8dp">
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="IDEA"
-            android:textColor="#666666"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"/>
-
-        <TextView
-            android:id="@+id/description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-            android:textColor="#444444"
-            android:justificationMode="inter_word"
-            tools:text="In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available."
-            />
+        android:clickable="true"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="8dp"
+        app:cardElevation="2dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginVertical="4dp"
-            android:gravity="end">
+            android:orientation="vertical"
+            android:padding="8dp">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/liked"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                app:icon="@drawable/like_o"
-                app:iconSize="30dp"
-                android:text="21"
-                app:iconGravity="start"/>
+                android:layout_marginStart="8dp"
+                app:setTitle="@{idea}"
+                tools:text="IDEA"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/share"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:icon="@android:drawable/ic_menu_share" />
+                android:layout_margin="8dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:justificationMode="inter_word"
+                app:setDescription="@{idea}"
+                tools:text="In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available." />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginVertical="4dp"
+                android:gravity="end">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/liked"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:icon="@drawable/like"
+                    app:iconSize="30dp"
+                    android:clickable="true"
+                    app:setLike="@{idea}"
+                    android:textColor="@color/secondaryDarkColor"
+                    app:iconTint="@color/secondaryDarkColor"
+                    tools:text="21"
+                    app:iconGravity="start"/>
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/share"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitCenter"
+                    android:tint="@color/secondaryDarkColor"
+                    android:src="@drawable/ic_share_24" />
+
+            </LinearLayout>
+
 
         </LinearLayout>
 
-
-    </LinearLayout>
-
-</com.google.android.material.card.MaterialCardView>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

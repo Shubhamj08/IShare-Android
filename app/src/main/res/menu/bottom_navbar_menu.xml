@@ -4,21 +4,20 @@
 
 
     <item
-        android:id="@+id/toIdeas"
+        android:id="@+id/ideasFragment"
         android:icon="@drawable/lamp"
         android:title="Ideas"
         android:enabled="true"/>
     <item
-        android:id="@+id/toPostIdea"
+        android:id="@+id/postIdeaFragment"
         android:icon="@drawable/add"
         android:title="Post"
         android:enabled="true"/>
     <item
-        android:id="@+id/toProfile"
+        android:id="@+id/profileFragment"
         android:icon="@drawable/user"
         android:title="Profile"
         android:enabled="true"/>
-
 
 
 </menu>

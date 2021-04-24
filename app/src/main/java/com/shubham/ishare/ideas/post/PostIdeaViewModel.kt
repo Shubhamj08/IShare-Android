@@ -15,18 +15,28 @@ class PostIdeaViewModel: ViewModel() {
     val description: MutableLiveData<String>
         get() = _description
 
-    fun onSubmit(t: EditText, d: EditText){
+    var titleError: String? = null
+    var descriptionError: String? = null
+
+    fun onSubmit(t: EditText, d: EditText): Boolean{
+        titleError = validateTitle(t.text.toString())
+        descriptionError = validateDescription(d.text.toString())
         _title.value = t.text.toString()
         _description.value = d.text.toString()
+
+        if(titleError == null && descriptionError == null)
+            return true
+
+        return false
     }
 
     private val validate = IdeaValidate()
 
-    fun validateTitle(): String?{
-        return validate.validateTitle(_title.value.toString())
+    fun validateTitle(title: String): String?{
+        return validate.validateTitle(title)
     }
 
-    fun validateDescription(): String?{
-        return validate.validateDescription(_description.value.toString())
+    fun validateDescription(desc: String): String?{
+        return validate.validateDescription(desc)
     }
 }

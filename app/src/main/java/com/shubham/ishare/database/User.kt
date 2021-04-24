@@ -27,7 +27,6 @@ data class User(
     }
 }
 
-
 public class Converters {
     @TypeConverter
     fun fromString(value: String): List<String>{

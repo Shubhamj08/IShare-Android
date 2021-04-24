@@ -9,6 +9,7 @@ import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -17,6 +18,7 @@ import com.shubham.ishare.CommonViewModel
 import com.shubham.ishare.R
 import com.shubham.ishare.adapters.IdeaAdapter
 import com.shubham.ishare.databinding.FragmentProfileBinding
+import com.shubham.ishare.ideasResponse
 import com.shubham.ishare.user
 import java.util.*
 import kotlin.concurrent.schedule
@@ -29,39 +31,50 @@ class ProfileFragment : Fragment() {
     ): View? {
         val binding = DataBindingUtil.inflate<FragmentProfileBinding>(inflater, R.layout.fragment_profile, container, false)
 
-        //Hide Login if user already exists
+        //Common ViewModel
+        val commonViewModel = ViewModelProvider(requireActivity()).get(CommonViewModel::class.java)
+
+        val topAppBar: MaterialToolbar = requireActivity().findViewById(R.id.appBar)
+        topAppBar.menu.setGroupVisible(R.id.icons_group, true)
+        topAppBar.setOnMenuItemClickListener{
+            when(it.itemId){
+                R.id.logout -> {
+                    commonViewModel.logout()
+                    navigateToLoginFragment()
+                }
+            }
+            true
+        }
+
         user.observe(viewLifecycleOwner, Observer {
-            if(it != null){
-                binding.login.visibility = View.GONE
+            if(it == null){
+                topAppBar.menu.findItem(R.id.logout).setIcon(R.drawable.ic_baseline_login_24)
+                binding.username.text = getString(R.string.default_username)
+                binding.userEmail.text = getString(R.string.default_email)
             } else {
-                binding.login.visibility = View.VISIBLE
+                topAppBar.menu.findItem(R.id.logout).setIcon(R.drawable.logout)
+                binding.username.text = user.value?.username
+                binding.userEmail.text = user.value?.email
             }
         })
 
-        binding.login.setOnClickListener{
-            navigateToLoginFragment()
-        }
-
-        //Common ViewModel
-        val commonViewModel = ViewModelProvider(requireActivity()).get(CommonViewModel::class.java)
         //Profile ViewModel
         val viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
 
         //Recycler View Adapter for posted and liked Ideas lists
-        val ideasAdapter = IdeaAdapter()
+        val ideasAdapter = IdeaAdapter(requireContext())
         binding.ideasList.adapter = ideasAdapter
-        ideasAdapter.data = listOf()
 
         //Update data in profile ViewModel whenever a change occurs
-        commonViewModel.ideaResponse.observe(viewLifecycleOwner, Observer {
-            viewModel.updateResponse(commonViewModel.ideaResponse.value)
+        ideasResponse.observe(viewLifecycleOwner, Observer {
+            viewModel.updateResponse(ideasResponse.value)
         })
 
         //Update data in recycler view adapter
         viewModel.response.observe(viewLifecycleOwner, Observer {
             viewModel.yourIdeas()
             viewModel.likedIdeas()
-            ideasAdapter.data = viewModel.ideas
+            ideasAdapter.submitList(viewModel.ideas)
         })
 
         val bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
@@ -76,7 +89,7 @@ class ProfileFragment : Fragment() {
                     changeBottomSheetState(bottomSheetBehavior, true)
                     viewModel.changeBottomSheetContentToYourIdeas()
                     bottomSheetHeading.text = viewModel.heading
-                    ideasAdapter.data = viewModel.ideas
+                    ideasAdapter.submitList(viewModel.ideas)
                 }
             }
 
@@ -87,7 +100,7 @@ class ProfileFragment : Fragment() {
                     changeBottomSheetState(bottomSheetBehavior, true)
                     viewModel.changeBottomSheetContentToLikedIdeas()
                     bottomSheetHeading.text = viewModel.heading
-                    ideasAdapter.data = viewModel.ideas
+                    ideasAdapter.submitList(viewModel.ideas)
                 }
             }
         }
@@ -95,25 +108,15 @@ class ProfileFragment : Fragment() {
         //Show bottom navigation on Profile fragment
         val bottomNavView: BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigation)
         bottomNavView.visibility = View.VISIBLE
+
         bottomNavView.setOnNavigationItemSelectedListener { item ->
             when(item.itemId){
-                R.id.toPostIdea -> {
+                R.id.postIdeaFragment -> {
                     navigateToPostIdeaFragment()
                 }
 
-                R.id.toIdeas -> {
+                R.id.ideasFragment -> {
                     navigateToIdeasFragment()
-                }
-            }
-            true
-        }
-
-        val topAppBar: MaterialToolbar = requireActivity().findViewById(R.id.appBar)
-        topAppBar.setOnMenuItemClickListener{
-            when(it.itemId){
-                R.id.logout -> {
-                    commonViewModel.logout()
-                    navigateToLoginFragment()
                 }
             }
             true
@@ -123,15 +126,15 @@ class ProfileFragment : Fragment() {
     }
 
     private fun navigateToPostIdeaFragment(){
-        this.findNavController().navigate(R.id.action_profileFragment_to_postIdeaFragment)
+        Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_postIdeaFragment)
     }
 
     private fun navigateToIdeasFragment(){
-        this.findNavController().navigate(R.id.action_profileFragment_to_ideasFragment)
+        Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_ideasFragment)
     }
 
     private fun navigateToLoginFragment(){
-        this.findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
+        Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_loginFragment)
     }
 
     //Change state of bottom sheet which is used to display posted and liked ideas

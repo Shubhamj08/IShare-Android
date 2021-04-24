@@ -1,115 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     app:layout_behavior=".GestureLockedBottomSheetBehaviour"
     tools:context=".profile.ProfileFragment">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingHorizontal="8dp"
-        android:background="#f1f1f1">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/username"
-            style="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="@color/black"
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:gravity="center"
-            android:text="Username"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingHorizontal="8dp">
 
-        <TextView
-            android:id="@+id/userEmail"
-            style="@style/TextAppearance.MaterialComponents.Subtitle1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="abc@gmail.com"/>
+            <TextView
+                android:id="@+id/username"
+                style="@style/TextAppearance.AppCompat.Headline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="32dp"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                tools:text="Username" />
 
-        <com.google.android.material.button.MaterialButtonToggleGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            app:singleSelection="true">
+            <TextView
+                android:id="@+id/userEmail"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:gravity="center"
+                android:paddingBottom="12dp"
+                tools:text="abc@gmail.com" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/yourIdeasButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
                 android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/secondaryColor"
                 android:paddingVertical="10sp"
-                android:text="Your Ideas"/>
+                android:text="Your Ideas" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/likedIdeasButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
                 android:layout_marginHorizontal="24dp"
+                android:backgroundTint="@color/secondaryColor"
                 android:paddingVertical="10sp"
-                android:text="Ideas You Liked"/>
+                android:text="Ideas You Liked" />
 
-        </com.google.android.material.button.MaterialButtonToggleGroup>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/blue_700"
-            android:paddingVertical="10sp"
-            android:text="LOGIN"
-            android:layout_gravity="center"
-            app:iconGravity="end"
-            app:icon="@drawable/profile"
-            app:iconSize="30dp"/>
-
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:id="@+id/bottomSheet"
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:background="@drawable/bottom_sheet_shape"
-                android:elevation="20dp"
-                android:translationZ="20dp"
-                app:behavior_peekHeight="0dp"
-                app:behavior_skipCollapsed="true"
-                app:behavior_hideable="true"
-                app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-                app:srcCompat="@drawable/ishare_logo_large"
-                tools:behavior_peekHeight="70dp">
+                android:layout_height="match_parent">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/bottomSheetHeading"
-                    android:layout_marginTop="4dp"
+                <LinearLayout
+                    android:id="@+id/bottomSheet"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                    tools:text="Your Ideas"
-                    />
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/ideasList"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/idea"/>
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bottom_sheet_shape"
+                    android:backgroundTint="@color/secondaryColor"
+                    android:elevation="20dp"
+                    android:orientation="vertical"
+                    android:translationZ="20dp"
+                    app:behavior_hideable="true"
+                    app:behavior_peekHeight="0dp"
+                    app:behavior_skipCollapsed="true"
+                    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+                    app:srcCompat="@drawable/ishare_logo_large"
+                    tools:behavior_peekHeight="70dp">
 
-            </LinearLayout>
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/bottomSheetHeading"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                        tools:text="Your Ideas" />
 
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/ideasList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/idea" />
 
+                </LinearLayout>
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.core.widget.NestedScrollView>
 </layout>

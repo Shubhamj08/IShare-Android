@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.shubham.ishare.databinding.ActivityMainBinding
 import com.shubham.ishare.ideas.IdeasFragment
 import com.shubham.ishare.ideas.post.PostIdeaFragment
@@ -17,7 +18,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-
+        val navController = Navigation.findNavController(this, R.id.navHostFragment)
+        NavigationUI.setupWithNavController(binding.bottomNavigation, navController)
     }
 
 }

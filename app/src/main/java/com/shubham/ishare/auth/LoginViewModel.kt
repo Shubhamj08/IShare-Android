@@ -32,17 +32,16 @@ class LoginViewModel: ViewModel() {
         if(emailError == null && passError == null){
             return true
         }
-
         return false
     }
 
     private val validate = AuthValidate()
 
-    fun validateEmail(em: String): String? {
+    private fun validateEmail(em: String): String? {
         return validate.validateEmail(em)
     }
 
-    fun validatePassword(pass: String): String? {
+    private fun validatePassword(pass: String): String? {
         return validate.validatePassword(pass)
     }
 

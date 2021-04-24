@@ -13,6 +13,6 @@ data class Idea(
     @Json(name = "user")
     var author: String,
     val date: String,
-    var liked: Boolean = likes.contains(user),
+    var liked: Boolean = likes.contains(user.value?._id),
     var nLikes: Int = likes.size
 )

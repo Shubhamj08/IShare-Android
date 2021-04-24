@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary_accent">#18FFFF</color>
-    <color name="blue_200">#9FA8DA</color>
-    <color name="blue_300">#7986CB</color>
-    <color name="blue_500">#3F51B5</color>
-    <color name="blue_700">#303F9F</color>
-    <color name="teal_400">#26A69A</color>
-    <color name="teal_500">#009688</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="primaryColor">#00acc1</color>
+
+    <color name="primaryLightColor">#5ddef4</color>
+
+    <color name="primaryDarkColor">#007c91</color>
+
+    <color name="secondaryColor">#4fc3f7</color>
+
+    <color name="secondaryLightColor">#8bf6ff</color>
+
+    <color name="secondaryDarkColor">#0093c4</color>
+
+    <color name="primaryTextColor">#000000</color>
+
+    <color name="secondaryTextColor">#000000</color>
 </resources>
