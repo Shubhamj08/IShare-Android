@@ -2,6 +2,7 @@ package com.shubham.ishare.ideas
 
 import android.os.Bundle
 import android.view.*
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -78,6 +79,17 @@ class IdeasFragment : Fragment() {
             }
             true
         }
+
+        val onBackPressedCallback = object: OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if(user.value != null)
+                    activity?.finishAndRemoveTask()
+                else
+                    Navigation.findNavController(requireView()).popBackStack()
+            }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressedCallback)
 
         return binding.root
     }
