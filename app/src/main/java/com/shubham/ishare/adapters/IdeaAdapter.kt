@@ -36,6 +36,8 @@ class IdeaAdapter(val context: Context): ListAdapter<Idea, IdeaAdapter.IdeaViewH
                     holder.liked.apply {
                         setIconResource(R.drawable.like_o)
                         text = (idea.nLikes - 1).toString()
+                        idea.liked = false
+                        idea.nLikes -= 1
                     }
                     try {
                         likeResponse.value = Backend.retrofitService.unlike(jwt!!, idea)
@@ -49,6 +51,8 @@ class IdeaAdapter(val context: Context): ListAdapter<Idea, IdeaAdapter.IdeaViewH
                     holder.liked.apply {
                         setIconResource(R.drawable.like)
                         text = (idea.nLikes + 1).toString()
+                        idea.liked = true
+                        idea.nLikes += 1
                     }
                     try {
                         likeResponse.value = Backend.retrofitService.like(jwt!!, idea)
