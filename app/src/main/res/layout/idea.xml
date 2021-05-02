@@ -19,9 +19,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
+        android:background="#ffffff"
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="8dp"
-        app:cardElevation="2dp">
+        app:cardCornerRadius="10dp"
+        android:outlineAmbientShadowColor="#f1f1f1"
+        app:cardElevation="4dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,14 +39,14 @@
                 android:layout_marginStart="8dp"
                 app:setTitle="@{idea}"
                 tools:text="IDEA"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
             <TextView
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                 android:justificationMode="inter_word"
                 app:setDescription="@{idea}"
                 tools:text="In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available." />
@@ -64,8 +67,8 @@
                     app:iconSize="30dp"
                     android:clickable="true"
                     app:setLike="@{idea}"
-                    android:textColor="@color/secondaryDarkColor"
-                    app:iconTint="@color/secondaryDarkColor"
+                    android:textColor="@color/secondaryLightColor"
+                    app:iconTint="@color/secondaryLightColor"
                     tools:text="21"
                     app:iconGravity="start"/>
 
@@ -75,7 +78,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleType="fitCenter"
-                    android:tint="@color/secondaryDarkColor"
+                    android:tint="@color/primaryLightColor"
                     android:src="@drawable/ic_share_24" />
 
             </LinearLayout>

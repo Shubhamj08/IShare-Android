@@ -64,7 +64,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/bottom_sheet_shape"
-                    android:backgroundTint="@color/secondaryColor"
+                    android:backgroundTint="@color/secondaryLightColor"
                     android:elevation="20dp"
                     android:orientation="vertical"
                     android:translationZ="20dp"

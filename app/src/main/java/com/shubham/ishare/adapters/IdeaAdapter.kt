@@ -17,6 +17,7 @@ import com.shubham.ishare.ideas.Idea
 import com.shubham.ishare.jwt
 import com.shubham.ishare.services.Backend
 import com.shubham.ishare.services.LikeService
+import com.shubham.ishare.user
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,7 +33,7 @@ class IdeaAdapter(val context: Context): ListAdapter<Idea, IdeaAdapter.IdeaViewH
 
         holder.liked.setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {
-                if (idea!!.liked) {
+                if (idea!!.liked || idea.likes.contains(user.value?._id)) {
                     holder.liked.apply {
                         setIconResource(R.drawable.like_o)
                         text = (idea.nLikes - 1).toString()
