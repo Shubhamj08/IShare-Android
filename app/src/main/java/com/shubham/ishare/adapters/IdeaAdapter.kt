@@ -5,6 +5,8 @@ import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.ImageButton
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.DiffUtil
@@ -14,6 +16,7 @@ import com.google.android.material.button.MaterialButton
 import com.shubham.ishare.R
 import com.shubham.ishare.databinding.IdeaBinding
 import com.shubham.ishare.ideas.Idea
+import com.shubham.ishare.ideasResponse
 import com.shubham.ishare.jwt
 import com.shubham.ishare.services.Backend
 import com.shubham.ishare.services.LikeService
@@ -21,13 +24,17 @@ import com.shubham.ishare.user
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 import kotlin.coroutines.coroutineContext
 
 val likeResponse = MutableLiveData<Idea>()
 class IdeaAdapter(val context: Context): ListAdapter<Idea, IdeaAdapter.IdeaViewHolder>(IdeaDiffCallback()) {
 
     private val likeService = LikeService()
+    //private lateinit var ideaList: MutableList<Idea>
+
     override fun onBindViewHolder(holder: IdeaViewHolder, position: Int) {
+        //ideaList = currentList
         val idea = getItem(position)
         holder.bind(idea)
 
@@ -99,6 +106,31 @@ class IdeaAdapter(val context: Context): ListAdapter<Idea, IdeaAdapter.IdeaViewH
             }
         }
     }
+
+//    override fun getFilter(): Filter {
+//        return object : Filter() {
+//            override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
+//                try {
+//                    submitList(p1?.values as MutableList<Idea>?)
+//                } catch(ex: Exception){
+//                    Log.i("search", ex.message.toString())
+//                }
+//            }
+//
+//            override fun performFiltering(p0: CharSequence?): FilterResults? {
+//                val qs = p0.toString().toLowerCase(Locale.ROOT)
+//                val filterResults = FilterResults()
+//                filterResults.values = {
+//                    if(qs.isEmpty())
+//                        ideaList
+//                    else ideaList.filter {
+//                        it.title.toLowerCase(Locale.ROOT).contains(qs) || it.description.toLowerCase(Locale.ROOT).contains(qs)
+//                    }
+//                }
+//                return filterResults
+//            }
+//        }
+//    }
 }
 
 class IdeaDiffCallback: DiffUtil.ItemCallback<Idea>(){

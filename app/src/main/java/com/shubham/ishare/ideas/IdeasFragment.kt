@@ -1,7 +1,10 @@
 package com.shubham.ishare.ideas
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
 import android.view.*
+import android.widget.SearchView
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
@@ -23,6 +26,10 @@ class IdeasFragment : Fragment() {
         //Common ViewModel
         val commonViewModel = ViewModelProvider(requireActivity()).get(CommonViewModel::class.java)
 
+        //Recycler View Adapter
+        val adapter = IdeaAdapter(requireContext())
+        binding.ideaList.adapter = adapter
+
         val topAppBar: MaterialToolbar = requireActivity().findViewById(R.id.appBar)
         topAppBar.menu.setGroupVisible(R.id.icons_group, true)
         topAppBar.setOnMenuItemClickListener{
@@ -34,6 +41,19 @@ class IdeasFragment : Fragment() {
             }
             true
         }
+//        (topAppBar.menu.findItem(R.id.app_bar_search).actionView as SearchView).setOnQueryTextListener(
+//            object : SearchView.OnQueryTextListener {
+//                override fun onQueryTextSubmit(p0: String?): Boolean {
+//                    return false
+//                }
+//
+//                override fun onQueryTextChange(p0: String?): Boolean {
+//                    adapter.filter.filter(p0)
+//                    return false
+//                }
+//
+//            }
+//        )
 
         user.observe(viewLifecycleOwner, Observer {
             if(it == null){
@@ -52,10 +72,6 @@ class IdeasFragment : Fragment() {
 
         //Ideas ViewModel
         val viewModel = ViewModelProvider(this).get(IdeasViewModel::class.java)
-
-        //Recycler View Adapter
-        val adapter = IdeaAdapter(requireContext())
-        binding.ideaList.adapter = adapter
 
         //Update Ideas ViewModel with ideas from common ViewModel
         ideasResponse.observe(viewLifecycleOwner, Observer {

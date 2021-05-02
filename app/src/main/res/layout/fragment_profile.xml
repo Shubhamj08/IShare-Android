@@ -38,21 +38,16 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/yourIdeasButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
                 android:layout_marginTop="16dp"
-                android:backgroundTint="@color/secondaryColor"
-                android:paddingVertical="10sp"
-                android:text="Your Ideas" />
+                app:elevation="2dp"
+                android:text="Your Ideas"
+                style="@style/buttonStyle" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/likedIdeasButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/buttonStyle"
                 android:layout_marginHorizontal="24dp"
-                android:backgroundTint="@color/secondaryColor"
-                android:paddingVertical="10sp"
                 android:text="Ideas You Liked" />
 
             <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -64,7 +59,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/bottom_sheet_shape"
-                    android:backgroundTint="@color/secondaryLightColor"
+                    android:backgroundTint="#f8f8f8"
                     android:elevation="20dp"
                     android:orientation="vertical"
                     android:translationZ="20dp"
