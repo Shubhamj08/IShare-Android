@@ -8,8 +8,8 @@ class IdeaValidate {
             return "Title is required"
         }
 
-        if(title.length < 4){
-            return "Title should contain at least 4 characters"
+        if(title.length < 5){
+            return "Title should contain at least 5 characters"
         }
 
         return null

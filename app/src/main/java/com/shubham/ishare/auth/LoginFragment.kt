@@ -43,6 +43,7 @@ class LoginFragment : Fragment() {
             if(it != null){
                 binding.emailContainer.error = "email or password incorrect"
                 binding.progressBar.visibility = View.GONE
+                binding.submitButton.isEnabled = true
                 commonViewModel.loginError.value = null
             }
         })
@@ -67,10 +68,12 @@ class LoginFragment : Fragment() {
                 hideKeyboard()
                 emailContainer.error = null
                 progressBar.visibility = View.VISIBLE
+                submitButton.isEnabled = false
                 if(viewModel.onSubmit(emailText, passwordText)){
                     commonViewModel.login(emailText.text.toString(), passwordText.text.toString())
                 } else {
                     progressBar.visibility = View.GONE
+                    submitButton.isEnabled = true
                 }
             }
 

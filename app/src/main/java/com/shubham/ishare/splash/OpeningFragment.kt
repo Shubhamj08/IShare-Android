@@ -14,6 +14,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.shubham.ishare.CommonViewModel
 import com.shubham.ishare.R
 import com.shubham.ishare.databinding.FragmentOpeningBinding
+import com.shubham.ishare.ideasResponse
 import com.shubham.ishare.user
 import java.util.*
 
@@ -27,14 +28,6 @@ class OpeningFragment : Fragment() {
 
         val commonViewModel = ViewModelProvider(requireActivity()).get(CommonViewModel::class.java)
 
-        user.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            if(it != null){
-                this.findNavController().navigate(R.id.action_openingFragment_to_ideasFragment)
-            } else {
-                this.findNavController().navigate(R.id.action_openingFragment_to_loginFragment)
-            }
-        })
-
         val bottomNavView: BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigation)
         bottomNavView.visibility = View.GONE
 
@@ -42,5 +35,15 @@ class OpeningFragment : Fragment() {
         topAppBar.menu.setGroupVisible(R.id.icons_group, false)
 
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        user.observe(viewLifecycleOwner, androidx.lifecycle.Observer { it ->
+            if(it != null)
+                this.findNavController().navigate(R.id.action_openingFragment_to_ideasFragment)
+            else
+                this.findNavController().navigate(R.id.action_openingFragment_to_loginFragment)
+        })
     }
 }

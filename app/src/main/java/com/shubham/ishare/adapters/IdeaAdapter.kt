@@ -40,7 +40,7 @@ class IdeaAdapter(val context: Context): ListAdapter<Idea, IdeaAdapter.IdeaViewH
 
         holder.liked.setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {
-                if (idea!!.liked || idea.likes.contains(user.value?._id)) {
+                if (idea!!.liked) {
                     holder.liked.apply {
                         setIconResource(R.drawable.like_o)
                         text = (idea.nLikes - 1).toString()

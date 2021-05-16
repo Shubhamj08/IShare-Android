@@ -75,7 +75,12 @@ class IdeasFragment : Fragment() {
 
         //Update Ideas ViewModel with ideas from common ViewModel
         ideasResponse.observe(viewLifecycleOwner, Observer {
-            adapter.submitList(it)
+            if(it.isEmpty())
+                binding.progressBar.visibility = View.VISIBLE
+            else {
+                binding.progressBar.visibility = View.GONE
+                adapter.submitList(it)
+            }
         })
 
         //Set bottom navigation to visible in ideas fragment

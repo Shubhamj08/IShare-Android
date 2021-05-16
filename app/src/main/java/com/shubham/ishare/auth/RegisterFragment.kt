@@ -42,6 +42,7 @@ class RegisterFragment : Fragment() {
                 if(it != null){
                     binding.emailContainer.error = "user with this email already registered"
                     binding.progressBar.visibility = View.GONE
+                    binding.submitButton.isEnabled = true
                     registerError.value = null
                 }
             })
@@ -57,6 +58,7 @@ class RegisterFragment : Fragment() {
                 hideKeyboard()
                 emailContainer.error = null
                 progressBar.visibility = View.VISIBLE
+                submitButton.isEnabled = false
                 if(viewModel.onSubmit(usernameText, emailText, passwordText, confirmPasswordText)){
                     commonViewModel.register(
                         usernameText.text.toString(),
@@ -65,6 +67,7 @@ class RegisterFragment : Fragment() {
                     )
                 } else {
                     progressBar.visibility = View.GONE
+                    submitButton.isEnabled = true
                 }
             }
 

@@ -51,10 +51,14 @@ class ProfileFragment : Fragment() {
                 topAppBar.menu.findItem(R.id.logout).setIcon(R.drawable.ic_baseline_login_24)
                 binding.username.text = getString(R.string.default_username)
                 binding.userEmail.text = getString(R.string.default_email)
+                binding.likedIdeasButton.isEnabled = false
+                binding.yourIdeasButton.isEnabled = false
             } else {
                 topAppBar.menu.findItem(R.id.logout).setIcon(R.drawable.logout)
                 binding.username.text = user.value?.username
                 binding.userEmail.text = user.value?.email
+                binding.likedIdeasButton.isEnabled = true
+                binding.yourIdeasButton.isEnabled = true
             }
         })
 

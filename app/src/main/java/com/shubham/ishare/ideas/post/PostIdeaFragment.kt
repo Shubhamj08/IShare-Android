@@ -66,10 +66,11 @@ class PostIdeaFragment : Fragment() {
             postError.observe(viewLifecycleOwner, Observer {
                 if(it != null){
                     binding.progressBar.visibility = View.GONE
-                    if(it.contains("401")){
+                    binding.submitButton.isEnabled = true
+                    if(it.contains("401") || it.contains("NullPointerException")){
                         binding.titleContainer.error = "You need to login first"
-                    }
-                    Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show()
+                    } else
+                        Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show()
                     postError.value = null
                 }
             })
@@ -94,11 +95,10 @@ class PostIdeaFragment : Fragment() {
         //Click handler for idea submit button
         binding.submitButton.setOnClickListener {
             hideKeyboard()
-            binding.progressBar.visibility = View.VISIBLE
             if(viewModel.onSubmit(binding.postTitle, binding.postDescription)){
+                binding.progressBar.visibility = View.VISIBLE
+                it.isEnabled = false
                 commonViewModel.post(binding.postTitle.text.toString(), binding.postDescription.text.toString())
-            } else {
-                binding.progressBar.visibility = View.GONE
             }
         }
 

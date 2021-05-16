@@ -15,4 +15,7 @@
     <color name="primaryTextColor">#ffffff</color>
 
     <color name="secondaryTextColor">#ffffff</color>
+
+    <color name="bottomSheetColor">#f8f8f8</color>
+    <color name="bottomSheetColorNight">#272727</color>
 </resources>
